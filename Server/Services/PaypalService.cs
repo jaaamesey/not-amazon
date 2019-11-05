@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -8,14 +9,14 @@ namespace Studio1BTask.Services
 {
     public class PaypalService
     {
-        private static readonly string _clientId =
-            "AbY5qhTQK2zo_163bAA1xkA19YkBMg8uiLqqh3MIAULsH2yF7T2ZGQ38cx740JmcUq24_bwNLS6-e3LF";
-
-        private static readonly string _secret =
-            "EMicuENMd4PD-W86tF2wEvUFHTCf_bHhNqJYwc7zsRvEnKKj1tmSDlv30H220hxyeq-f0rbevVAJgGrk";
+        private static string _clientId;
+        private static string _secret;
 
         public PayPalHttpClient Client()
         {
+            _clientId = Environment.GetEnvironmentVariable("CUSTOMCONNSTR_PayPalClient");
+            _secret = Environment.GetEnvironmentVariable("CUSTOMCONNSTR_PayPalSecret");
+
             // Creating a sandbox environment
             var environment = new SandboxEnvironment(_clientId, _secret);
 
